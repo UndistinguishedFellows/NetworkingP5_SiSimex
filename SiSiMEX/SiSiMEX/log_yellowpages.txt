@@ -1,0 +1,7 @@
+70847703 <INFO>    | -------------------------------------------------------------
+70847718 <INFO>    |                    SiSiMEX: Yellow Pages                     
+70847718 <INFO>    | -------------------------------------------------------------
+70847718 <INFO>    | 
+70847734 <INFO>    |  - Server Listen socket created
+70847734 <INFO>    |  - Socket Bind to interface 127.0.0.1:8000
+70847750 <INFO>    |  - Socket entered in Listen state...
