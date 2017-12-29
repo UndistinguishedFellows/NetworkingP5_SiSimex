@@ -11,7 +11,7 @@ class UCP :
 public:
 
 	// Constructor and destructor
-	UCP(Node *node, uint16_t requestedItemId, const AgentLocation &uccLoc);
+	UCP(Node *node, uint16_t requestedItemId, const AgentLocation &uccLoc, int layer);
 	~UCP();
 
 	void update() override;
@@ -29,12 +29,14 @@ private:
 
 	void requestItem();
 	void createChildMCP(uint16_t constraintItemId);
-	void sendConstraint(uint16_t constraintItemId);
 	void destroyChildMCP();
 
-	uint16_t _requestedItemId; /**< The item to request. */
+	void endNegotiation(TCPSocketPtr& socket, const PacketHeader& pckHeader, bool agreement);
+	void endNegotiation(bool agreement);
 
+	uint16_t _requestedItemId; /**< The item to request. */
 	AgentLocation _uccLocation; /**< Location of the remote UCC agent. */
+	int layer;
 
 	MCPPtr _mcp; /**< The child MCP. */
 

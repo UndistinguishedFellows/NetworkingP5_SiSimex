@@ -11,7 +11,7 @@ class MCP :
 public:
 
 	// Constructor and destructor
-	MCP(Node *node, uint16_t itemId);
+	MCP(Node *node, uint16_t itemId, int layer = 0);
 	~MCP();
 
 	// Getters
@@ -42,6 +42,7 @@ private:
 
 	int _mccRegisterIndex; /**< Iterator through _mccRegisters. */
 	std::vector<AgentLocation> _mccRegisters; /**< MCCs returned by the YP. */
+	int layer;
 
 	UCPPtr _ucp; /**< Child UCP. */
 

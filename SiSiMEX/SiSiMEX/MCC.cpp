@@ -8,7 +8,8 @@ enum State
 	ST_REGISTERING,
 	ST_IDLE,
 
-	// TODO: Add other states ...
+	// DONE: Add other states ...
+	ST_NEGOTIATION,
 	
 	ST_UNREGISTERING,
 	ST_FINISHED
@@ -32,15 +33,33 @@ void MCC::update()
 	switch (state())
 	{
 	case ST_INIT:
+	{
 		if (registerIntoYellowPages()) {
 			setState(ST_REGISTERING);
-		} else {
+		}
+		else {
 			setState(ST_FINISHED);
 		}
 		break;
-
-	// TODO: Handle other states
-	
+	}
+	// DONE: Handle other states
+	case ST_NEGOTIATION:
+	{
+		if(_ucc->negotiationFinished())
+		{
+			if(_ucc->negotiationAgreement())
+			{
+				//iLog << "MCC [ID: " << id() << "]: Set state - Unregistering.";
+				setState(ST_UNREGISTERING);
+				unregisterFromYellowPages();
+			}
+			else
+			{
+				//iLog << "MCC [ID: " << id() << "]: Set state - Idle.";
+				setState(ST_IDLE);
+			}
+		}
+	}	
 	case ST_FINISHED:
 		finish();
 	}
@@ -48,34 +67,54 @@ void MCC::update()
 
 void MCC::finalize()
 {
-	// TODO
+	// DONE
+	destroyChildUCC();
 }
 
 
 void MCC::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader, InputMemoryStream &stream)
 {
 	const PacketType packetType = packetHeader.packetType;
-	if (state() == ST_REGISTERING && packetType == PacketType::RegisterMCCAck) {
+	if (state() == ST_REGISTERING && packetType == PacketType::RegisterMCCAck) 
+	{
 		setState(ST_IDLE);
 		socket->Disconnect();
 	}
-	else if (state() == ST_UNREGISTERING && packetType == PacketType::UnregisterMCCAck) {
+	else if (state() == ST_UNREGISTERING && packetType == PacketType::UnregisterMCCAck) 
+	{
 		setState(ST_FINISHED);
 		socket->Disconnect();
 	}
-	//else TODO handle other requests
+	else if(state() == ST_IDLE && packetType == PacketType::SendNegotiationRequestMCC)
+	{
+		//DONE: handle other requests
+		//iLog << "MCC [ID: " << id() << "]: Set state - Nogotiating with UCC.";
+		setState(ST_NEGOTIATION);
+		createChildUCC();
+		
+		// Send response
+
+		OutputMemoryStream outStream;
+		PacketHeader outHeader;
+		outHeader.packetType = PacketType::SendNegotiationRequestMCCAck;
+		outHeader.srcAgentId = _ucc->id();
+		outHeader.dstAgentId = packetHeader.srcAgentId;
+		outHeader.Write(outStream);
+
+		socket->SendPacket(outStream.GetBufferPtr(), outStream.GetSize());
+	}
 }
 
 bool MCC::negotiationFinished() const
 {
-	// TODO
-	return false;
+	// DONE
+	return _ucc ? _ucc->negotiationFinished() : false;
 }
 
 bool MCC::negotiationAgreement() const
 {
-	// TODO
-	return false;
+	// DONE
+	return _ucc->negotiationAgreement();
 }
 
 bool MCC::registerIntoYellowPages()
@@ -116,10 +155,18 @@ void MCC::unregisterFromYellowPages()
 
 void MCC::createChildUCC()
 {
-	// TODO
+	// DONE
+	if(_contributedItemId != NULL_ITEM_ID)
+		_ucc = std::make_shared<UCC>(node(), _contributedItemId, _constraintItemId);
+	else
+		_ucc = std::make_shared<UCC>(node(), _contributedItemId);
+
+	g_AgentContainer->addAgent(_ucc);
 }
 
 void MCC::destroyChildUCC()
 {
-	// TODO
+	// DONE
+	if (_ucc) 
+		_ucc->finalize();
 }

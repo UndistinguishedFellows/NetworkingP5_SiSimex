@@ -18,9 +18,16 @@ enum class PacketType
 	QueryMCCsForItem,
 	ReturnMCCsForItem,
 	// MCP <-> MCC
-	// TODO: Add message types
+	// DONE: Add message types
+	SendNegotiationRequestMCC,
+	SendNegotiationRequestMCCAck,
 	// UCP <-> UCC
-	// TODO: Add message types
+	// DONE: Add message types
+	ItemRequestToUCC,
+	ResourceOfferToUCP,
+	ResourceNegotiationEnd,
+	// DONE: Contstrains
+	ItemConstrain,
 	Last
 };
 
@@ -105,12 +112,29 @@ public:
 
 
 // MCP <-> MCC
-
-// TODO: Add message classes
-
+// DONE: Add message classes
+using PacketNegotiationRequest = PacketRegisterMCC;
 
 // UCP <-> UCC
+// DONE: Add message classes
+using PacketItemRequestToUCC = PacketRegisterMCC;
+using PacketResourceOfferedToUCP = PacketRegisterMCC;
+using PacketItemConstrainToUCP = PacketRegisterMCC;
 
-// TODO: Add message classes
+// DONE: Constrains packet
 
+class PacketResourceNegotiationEnd
+{
+public:
+	void Read(InputMemoryStream& stream)
+	{
+		stream.Read(agreement);
+	}
 
+	void Write(OutputMemoryStream& stream)
+	{
+		stream.Write(agreement);
+	}
+
+	bool agreement;
+};

@@ -1,7 +1,44 @@
-70847703 <INFO>    | -------------------------------------------------------------
-70847718 <INFO>    |                    SiSiMEX: Yellow Pages                     
-70847718 <INFO>    | -------------------------------------------------------------
-70847718 <INFO>    | 
-70847734 <INFO>    |  - Server Listen socket created
-70847734 <INFO>    |  - Socket Bind to interface 127.0.0.1:8000
-70847750 <INFO>    |  - Socket entered in Listen state...
+525240500 <INFO>    | -------------------------------------------------------------
+525240500 <INFO>    |                    SiSiMEX: Yellow Pages                     
+525240500 <INFO>    | -------------------------------------------------------------
+525240500 <INFO>    | 
+525240515 <INFO>    |  - Server Listen socket created
+525240515 <INFO>    |  - Socket Bind to interface 127.0.0.1:8000
+525240515 <INFO>    |  - Socket entered in Listen state...
+525258000 <INFO>    | OnPacketReceived: 
+525258000 <INFO>    | PacketType::RegisterMCC
+525258015 <INFO>    |  - MCC Agent ID: 1
+525258015 <INFO>    |  - Contributed Item ID: 1
+525258015 <INFO>    |  - Remote host address: 127.0.0.1:64421
+525258015 <INFO>    | OnPacketReceived: 
+525258015 <INFO>    | PacketType::RegisterMCC
+525258015 <INFO>    |  - MCC Agent ID: 2
+525258015 <INFO>    |  - Contributed Item ID: 2
+525258015 <INFO>    |  - Remote host address: 127.0.0.1:64422
+525258015 <INFO>    | OnPacketReceived: 
+525258015 <INFO>    | PacketType::RegisterMCC
+525258015 <INFO>    |  - MCC Agent ID: 3
+525258015 <INFO>    |  - Contributed Item ID: 3
+525258031 <INFO>    |  - Remote host address: 127.0.0.1:64423
+525258031 <INFO>    | OnPacketReceived: 
+525258031 <INFO>    | PacketType::RegisterMCC
+525258031 <INFO>    |  - MCC Agent ID: 4
+525258031 <INFO>    |  - Contributed Item ID: 0
+525258031 <INFO>    |  - Remote host address: 127.0.0.1:64424
+525267781 <INFO>    | OnPacketReceived: 
+525267781 <INFO>    | PacketType::RegisterMCC
+525267781 <INFO>    |  - MCC Agent ID: 5
+525267781 <INFO>    |  - Contributed Item ID: 0
+525267781 <INFO>    |  - Remote host address: 127.0.0.1:64425
+525273281 <INFO>    | OnPacketReceived: 
+525273281 <INFO>    | PacketType::RegisterMCC
+525273281 <INFO>    |  - MCC Agent ID: 6
+525273281 <INFO>    |  - Contributed Item ID: 1
+525273281 <INFO>    |  - Remote host address: 127.0.0.1:64427
+525279140 <INFO>    | OnPacketReceived: 
+525279140 <INFO>    | PacketType::RegisterMCC
+525279140 <INFO>    |  - MCC Agent ID: 7
+525279140 <INFO>    |  - Contributed Item ID: 1
+525279140 <INFO>    |  - Remote host address: 127.0.0.1:64428
+525279953 <INFO>    | OnPacketReceived: 
+525279968 <INFO>    | PacketType::QueryMCCsForItem

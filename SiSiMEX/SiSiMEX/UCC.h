@@ -7,7 +7,7 @@ class UCC :
 public:
 
 	// Constructor and destructor
-	UCC(Node *node, uint16_t contributedItemId, uint16_t constraintItemId);
+	UCC(Node *node, uint16_t contributedItemId, uint16_t constraintItemId = NULL_ITEM_ID);
 	~UCC();
 
 	void update() override;
